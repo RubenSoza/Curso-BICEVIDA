@@ -51,7 +51,7 @@ options(highcharter.theme =
 
 - Cada clase consistirá de un 25% de exposición y un 90% de ejercitación.
 - **Todos** escribiremos código. *Hechando a prender se aprende!*
-- Todo el material estará en la página de [Educación Continua](http://www.educacioncontinua.uc.cl).
+- Todo el material estará en la página de [Educación Continua](http://www.educacioncontinua.uc.cl) y en el [GitHub oficial](https://github.com/RubenSoza/Curso-BICEVIDA).
 
 # Introducción a R{ .center .white data-background="#75AADB" }
 
