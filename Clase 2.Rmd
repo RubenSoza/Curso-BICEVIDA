@@ -189,7 +189,6 @@ kable(pollution2)
 
 - Explore la base de datos `starwars`.
 - Genere un filtro con las siguientes condiciones:
-
     - Si `height` es mayor que 200 o `mass` > 200, denomina al individuo como 'large'.
     - Si el individuo es de `species` 'Droid', denominarlo como 'Droid'.
     - En otro caso, denominelo como 'Other'.
