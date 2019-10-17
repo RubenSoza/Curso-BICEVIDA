@@ -561,7 +561,7 @@ c &lt;-<span class="st"> &quot;Hola Mundo&quot;</span> <span class="co"># String
 <li class="fragment"><code>which()</code></li>
 <li class="fragment"><code>summary()</code></li>
 </ul>
-<p><strong>Importante:</strong> Si deseas saber como utilizar una función en específico puedes hacer <code>?nombre_funcion()</code>. También puedes buscar <a href="www.google.cl">aquí</a>.</p>
+<p><strong>Importante:</strong> Si deseas saber como utilizar una función en específico puedes hacer <code>?nombre_funcion()</code>. También puedes buscar <a href="https://www.google.com">aquí</a>.</p>
 </section><section id="objetos-basicos-de-r-vectores" class="slide level2">
 <h2>Objetos básicos de R: Vectores</h2>
 <p>Para crear un vector se ocupa la función <strong>c()</strong>. Además podemos crear secuencias con la función <strong>seq()</strong>.</p>
@@ -674,7 +674,7 @@ data</code></pre></div>
 <li class="fragment">Si es excel: <strong>read_excel</strong>.</li>
 <li class="fragment">Si es spss: <strong>read_sav</strong>.</li>
 </ul>
-<p>Para más información, pueden entrar al siguiente <a href="https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/d%20import-cheatsheet_Spanish.pdf">torpedo</a>.</p>
+<p>Para más información, pueden entrar al siguiente <a href="https://resources.rstudio.com/spanish-pdfs/data-import-cheatsheet-spanish">torpedo</a>.</p>
 </section><section id="ejemplo-storms.csv" class="slide level2">
 <h2>Ejemplo: storms.csv</h2>
 <p>La base de datos storms se encuentra en el siguiente <a href="https://raw.githubusercontent.com/rstudio/EDAWR/master/data-raw/storms.csv">link</a>.</p>
@@ -733,154 +733,6 @@ numeros</code></pre></div>
 <li class="fragment">Dirijase a <a href="http://datos.gob.cl" class="uri">http://datos.gob.cl</a> y descargue dos bases de datos en diferentes formatos.</li>
 <li class="fragment">Lea dichas BD en R y obtenga las características de sus variables. Identifique una variable numérica y una variable categórica.</li>
 <li class="fragment">Instale el paquete <code>psych</code>, carguelo y utilice la función <code>describe()</code> de dicho paquete en la variable numérica encontrada antes. Luego, utilice la función <code>describeBy()</code> considerando la variable numérica y la categórica.</li>
-</ul>
-</section></section>
-<section><section id="manejo-de-bases-de-datos-utilizando-funciones-de-dplyr" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Manejo de bases de datos utilizando funciones de dplyr</h1></section><section id="filter-seleccionar-filas" class="slide level2">
-<h2>filter(): <em>Seleccionar filas</em></h2>
-<p>Permite seleccionar filas de cierta BD utilizando un criterio particular.</p>
-<p><img src="Images/filter.PNG" /></p>
-</section><section id="filter-codigo" class="slide level2">
-<h2>filter(): <em>Código</em></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(storms, storm <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Alberto&quot;</span>, <span class="st">&quot;Ana&quot;</span>))</code></pre></div>
-<pre><code>##     storm wind pressure       date
-## 1 Alberto  110     1007 2000-08-03
-## 2     Ana   40     1013 1997-06-30</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(storm <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Alberto&quot;</span>, <span class="st">&quot;Ana&quot;</span>))</code></pre></div>
-<pre><code>##     storm wind pressure       date
-## 1 Alberto  110     1007 2000-08-03
-## 2     Ana   40     1013 1997-06-30</code></pre>
-</section><section id="select-seleccionar-columnas" class="slide level2">
-<h2>select(): <em>Seleccionar Columnas</em></h2>
-<p>Permite seleccionar columnas de una base de datos en específico.</p>
-<p><img src="Images/select.PNG" /></p>
-</section><section id="select-codigo" class="slide level2">
-<h2>select() : <em>Código</em></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(storms, storm, pressure)</code></pre></div>
-<pre><code>##     storm pressure
-## 1 Alberto     1007
-## 2    Alex     1009
-## 3 Allison     1005
-## 4     Ana     1013
-## 5  Arlene     1010
-## 6  Arthur     1010</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(storm, pressure)</code></pre></div>
-<pre><code>##     storm pressure
-## 1 Alberto     1007
-## 2    Alex     1009
-## 3 Allison     1005
-## 4     Ana     1013
-## 5  Arlene     1010
-## 6  Arthur     1010</code></pre>
-</section><section id="select-codigo-alternativo" class="slide level2">
-<h2>select(): <em>Código alternativo</em></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>wind, <span class="op">-</span>date)</code></pre></div>
-<pre><code>##     storm pressure
-## 1 Alberto     1007
-## 2    Alex     1009
-## 3 Allison     1005
-## 4     Ana     1013
-## 5  Arlene     1010
-## 6  Arthur     1010</code></pre>
-</section><section id="arrange-ordenar-filas" class="slide level2">
-<h2>arrange(): <em>Ordenar filas</em></h2>
-<p>Permite ordenar de menor a mayor una BD teniendo en consideración una o más variables.</p>
-<p><img src="Images/arrange.PNG" /></p>
-</section><section id="arrange-codigo" class="slide level2">
-<h2>arrange(): <em>Código</em></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(storms, wind)</code></pre></div>
-<pre><code>##     storm wind pressure       date
-## 1     Ana   40     1013 1997-06-30
-## 2    Alex   45     1009 1998-07-27
-## 3  Arthur   45     1010 1996-06-17
-## 4  Arlene   50     1010 1999-06-11
-## 5 Allison   65     1005 1995-06-03
-## 6 Alberto  110     1007 2000-08-03</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(wind)</code></pre></div>
-<pre><code>##     storm wind pressure       date
-## 1     Ana   40     1013 1997-06-30
-## 2    Alex   45     1009 1998-07-27
-## 3  Arthur   45     1010 1996-06-17
-## 4  Arlene   50     1010 1999-06-11
-## 5 Allison   65     1005 1995-06-03
-## 6 Alberto  110     1007 2000-08-03</code></pre>
-</section><section id="arrange-codigo-de-mayor-a-menor." class="slide level2">
-<h2>arrange(): <em>Código de mayor a menor.</em></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(wind))</code></pre></div>
-<pre><code>##     storm wind pressure       date
-## 1 Alberto  110     1007 2000-08-03
-## 2 Allison   65     1005 1995-06-03
-## 3  Arlene   50     1010 1999-06-11
-## 4    Alex   45     1009 1998-07-27
-## 5  Arthur   45     1010 1996-06-17
-## 6     Ana   40     1013 1997-06-30</code></pre>
-</section><section id="mutate-crearmodificar-columnas" class="slide level2">
-<h2>mutate(): <em>Crear/Modificar Columnas</em></h2>
-<p>Permite crear o modificar una columna de la BD.</p>
-<p><img src="Images/mutate.PNG" /></p>
-</section><section id="mutate-codigo" class="slide level2">
-<h2>mutate(): <em>Código</em></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> pressure<span class="op">/</span>wind, <span class="dt">inverse =</span> <span class="dv">1</span><span class="op">/</span>ratio)</code></pre></div>
-<pre><code>##     storm wind pressure       date     ratio    inverse
-## 1 Alberto  110     1007 2000-08-03  9.154545 0.10923535
-## 2    Alex   45     1009 1998-07-27 22.422222 0.04459861
-## 3 Allison   65     1005 1995-06-03 15.461538 0.06467662
-## 4     Ana   40     1013 1997-06-30 25.325000 0.03948667
-## 5  Arlene   50     1010 1999-06-11 20.200000 0.04950495
-## 6  Arthur   45     1010 1996-06-17 22.444444 0.04455446</code></pre>
-</section><section id="summarise-resumir-columnas" class="slide level2">
-<h2>summarise(): <em>Resumir Columnas</em></h2>
-<p>Permite aplicar funciones de resumen en las columnas de una BD.</p>
-<p><img src="Images/summarize.PNG" /></p>
-</section><section id="summarise-codigo" class="slide level2">
-<h2>summarise(): <em>Código</em></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(wind), <span class="dt">sd =</span> <span class="kw">sd</span>(wind))</code></pre></div>
-<pre><code>##       mean       sd
-## 1 59.16667 26.34704</code></pre>
-</section><section id="ejemplo-en-rstudio-storms.csv" class="slide level2">
-<h2>Ejemplo en RStudio: storms.csv</h2>
-<ul>
-<li class="fragment">Seleccione las observaciones que tienen pressure mayor o igual a 1010 y wind menor a 50. Encuentre el promedio y la desviación estándar de wind en la BD resultante.</li>
-<li class="fragment">Divida por 1000 la variable pressure.</li>
-<li class="fragment">Quite la variable pressure y ordene de mayor a menor según fecha la base de datos resultante.</li>
-</ul>
-</section><section id="group_by-summarise-resumir-columnas-por-grupos" class="slide level2">
-<h2>group_by + summarise: <em>Resumir Columnas por Grupos</em></h2>
-<p>Group_by divide la base de datos en grupos, lo cual permite obtener medidas de resumen por grupos utilizando summarise.</p>
-<p><img src="Images/gby.PNG" /></p>
-</section><section id="group_by-summarise-codigo" class="slide level2">
-<h2>group_by + summarise: <em>Código</em></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pollution &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/rstudio/EDAWR/master/data-raw/pollution.csv&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pollution <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(city) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">promedio =</span> <span class="kw">median</span>(amount),
-            <span class="dt">suma =</span> <span class="kw">sum</span>(amount),
-            <span class="dt">n =</span> <span class="kw">n</span>(),
-            <span class="dt">max =</span> <span class="kw">max</span>(amount))</code></pre></div>
-<pre><code>## # A tibble: 3 x 5
-##   city     promedio  suma     n   max
-##   &lt;fct&gt;       &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-## 1 Beijing      88.5   177     2   121
-## 2 London       19      38     2    22
-## 3 New York     18.5    37     2    23</code></pre>
-</section><section id="ejemplo-en-rstudio-numeros.xlsx" class="slide level2 center white" data-background="#75AADB">
-<h2>Ejemplo en RStudio: numeros.xlsx</h2>
-<p>Encuentre el máximo y mínimo por región de la variable valor.</p>
-</section><section id="actividad-3" class="slide level2">
-<h2>Actividad 3</h2>
-<p>Teniendo en consideración la BD encuesta.xlsx:</p>
-<ul>
-<li class="fragment">Seleccione Región, Sexo, Edad, cuánto gastó en seguridad y Score Socioeconómico.</li>
-<li class="fragment">Seleccione hombres de Valparaíso.</li>
-<li class="fragment">Ordene de menor a mayor la edad.</li>
-<li class="fragment">Añada una nueva variable denominada PRSC, calculada como el Score del individuo dividido por el máximo del score observado.</li>
-<li class="fragment">Obtenga el promedio del PRSC para cada grupo de gasto en seguridad.</li>
 </ul>
 </section></section>
     </div>
