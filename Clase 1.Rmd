@@ -26,15 +26,8 @@ editor_options:
 ```{r setup, include=FALSE}
 library(highcharter)
 setwd('G:/Mi unidad/Universidad/Cursos/Curso BICEVIDA')
-file.remove(dir("wdgts/", full.names = TRUE))
-
 knitr::opts_chunk$set(fig.path = "static/img/", echo = TRUE, cache = TRUE)
 
-options(highcharter.theme =
-          hc_theme_smpl(chart = list(
-            backgroundColor = "transparent",
-            style = list(fontFamily = "Source Sans Pro"))
-            ))
 ```
 # <br><br>Computación Estadística con R<br><small>Clase 1 <br><br> Rubén Soza</small>{ .center .white data-background="#75AADB" }
 

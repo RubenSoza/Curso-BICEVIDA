@@ -1,9 +1,8 @@
 ---
-title: Computación Estadística con R
 author: false
 output:
-  html_document:
-    theme: lumen
+  prettydoc::html_pretty:
+    theme: cayman
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -23,7 +22,10 @@ source("setup.R")
 
 ```
 
-<img src="logouccolor.jpg" style="position:absolute;top:0px;right:70px;" width="80" />
+# Computación Estadística con R
+
+<img src="logouccolor.jpg" style="position:absolute;top:100px;right:70px;" width="100" />
 
 - [Clase 1](Clase-1.html): Introducción a `R`
 - [Clase 2](Clase-2.html): Manejo de Bases de Datos usando `Tidyverse`
+- [Clase 3](Clase-3.html): Visualización de Bases de Datos usando `ggplot2`
