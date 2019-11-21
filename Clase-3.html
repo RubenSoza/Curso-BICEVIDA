@@ -487,300 +487,79 @@ document.getElementsByTagName('head')[0].appendChild(style);
 
 
 <section><section id="computación-estadística-con-r-clase-3-rubén-soza" class="titleslide slide level1 center white" data-background="#75AADB"><h1><br><br>Computación Estadística con R<br><small>Clase 3 <br><br> Rubén Soza</small></h1></section></section>
-<section><section id="manejo-de-bases-de-datos-utilizando-funciones-de-dplyr" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Manejo de bases de datos utilizando funciones de dplyr</h1></section><section id="importar-datos" class="slide level2">
-<h2>Importar datos</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">songs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;Datasets/songs.csv&quot;</span>)
-<span class="kw">kable</span>(songs)</code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-song
-</th>
-<th style="text-align:left;">
-name
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Across the Universe
-</td>
-<td style="text-align:left;">
-John
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Come Together
-</td>
-<td style="text-align:left;">
-John
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Hello, Goodbye
-</td>
-<td style="text-align:left;">
-Paul
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Peggy Sue
-</td>
-<td style="text-align:left;">
-Buddy
-</td>
-</tr>
-</tbody>
-</table>
-</section><section class="slide level2">
-
+<section><section id="manejo-de-bases-de-datos" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Manejo de bases de datos</h1></section><section id="rename-renombra-columnas" class="slide level2">
+<h2>Rename: <em>Renombra Columnas</em></h2>
+<p>Permite cambiar los nombres de las columnas seleccionadas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">artists &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;Datasets/artists.csv&quot;</span>)
-<span class="kw">kable</span>(artists)</code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-name
-</th>
-<th style="text-align:left;">
-plays
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-George
-</td>
-<td style="text-align:left;">
-sitar
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-John
-</td>
-<td style="text-align:left;">
-guitar
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Paul
-</td>
-<td style="text-align:left;">
-bass
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ringo
-</td>
-<td style="text-align:left;">
-drums
-</td>
-</tr>
-</tbody>
-</table>
-</section><section id="rename-renombrar-columnas" class="slide level2">
-<h2>Rename: <em>Renombrar columnas</em></h2>
-<p>Permite cambiar los nombres de las columnas seleccionadas</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">artists <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rename</span>(<span class="dt">Nombres =</span> name) -&gt;<span class="st"> </span>artist2
-<span class="kw">kable</span>(artist2)</code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-Nombres
-</th>
-<th style="text-align:left;">
-plays
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-George
-</td>
-<td style="text-align:left;">
-sitar
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-John
-</td>
-<td style="text-align:left;">
-guitar
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Paul
-</td>
-<td style="text-align:left;">
-bass
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ringo
-</td>
-<td style="text-align:left;">
-drums
-</td>
-</tr>
-</tbody>
-</table>
-</section><section id="join-juntar-bases-de-datos" class="slide level2">
-<h2>join: <em>Juntar bases de datos</em></h2>
-<p>Existen 7 funciones, en dplyr, que permiten juntar/contrastar dos bases de datos en una sola, utilizando una columna como link. Algunos ejemplos son:</p>
-<ul>
-<li class="fragment"><strong>inner_join()</strong></li>
-<li class="fragment"><strong>left_join()</strong></li>
-<li class="fragment"><strong>right_join()</strong></li>
-</ul>
-</section><section id="left_join-ejemplo" class="slide level2">
-<h2><strong>left_join</strong>: <em>Ejemplo</em></h2>
-<p><img src="Images/left_join.png" /></p>
-</section><section id="algunos-otros-ejemplos" class="slide level2">
-<h2>Algunos otros ejemplos:</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">artist3 &lt;-<span class="st"> </span><span class="kw">inner_join</span>(songs, artists, <span class="dt">by =</span> <span class="st">&quot;name&quot;</span>)
-<span class="kw">kable</span>(artist3)</code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-song
-</th>
-<th style="text-align:left;">
-name
-</th>
-<th style="text-align:left;">
-plays
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Across the Universe
-</td>
-<td style="text-align:left;">
-John
-</td>
-<td style="text-align:left;">
-guitar
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Come Together
-</td>
-<td style="text-align:left;">
-John
-</td>
-<td style="text-align:left;">
-guitar
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Hello, Goodbye
-</td>
-<td style="text-align:left;">
-Paul
-</td>
-<td style="text-align:left;">
-bass
-</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">artist4 &lt;-<span class="st"> </span><span class="kw">right_join</span>(songs, artists, <span class="dt">by =</span> <span class="st">&quot;name&quot;</span>)
-<span class="kw">kable</span>(artist4)</code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-song
-</th>
-<th style="text-align:left;">
-name
-</th>
-<th style="text-align:left;">
-plays
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-George
-</td>
-<td style="text-align:left;">
-sitar
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Across the Universe
-</td>
-<td style="text-align:left;">
-John
-</td>
-<td style="text-align:left;">
-guitar
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Come Together
-</td>
-<td style="text-align:left;">
-John
-</td>
-<td style="text-align:left;">
-guitar
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Hello, Goodbye
-</td>
-<td style="text-align:left;">
-Paul
-</td>
-<td style="text-align:left;">
-bass
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-Ringo
-</td>
-<td style="text-align:left;">
-drums
-</td>
-</tr>
-</tbody>
-</table>
+artists</code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##   name   plays 
+##   &lt;chr&gt;  &lt;chr&gt; 
+## 1 George sitar 
+## 2 John   guitar
+## 3 Paul   bass  
+## 4 Ringo  drums</code></pre>
 </section><section class="slide level2">
 
-<p>¿Qué pasa si las columnas links poseen 2 nombres diferentes?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">artists <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">Nombres =</span> name) -&gt;<span class="st"> </span>artist2
+artist2</code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##   Nombres plays 
+##   &lt;chr&gt;   &lt;chr&gt; 
+## 1 George  sitar 
+## 2 John    guitar
+## 3 Paul    bass  
+## 4 Ringo   drums</code></pre>
+</section><section id="join-junta-bases-de-datos" class="slide level2">
+<h2>join(): <em>Junta Bases de Datos</em></h2>
+<p align="justify">
+Existen 7 funciones, en dplyr, que permiten juntar/contrastar dos bases de datos, utilizando una columna como link.
+</p>
+<p align="left">
+Algunos ejemplos son:
+</p>
+<ul>
+<li class="fragment"><code>inner_join()</code></li>
+<li class="fragment"><code>left_join()</code></li>
+<li class="fragment"><code>right_join()</code></li>
+</ul>
+</section><section id="left_join" class="slide level2">
+<h2>left_join</h2>
+<p><img src="Images/left_join.png" /></p>
+</section><section id="left_join-ejemplo" class="slide level2">
+<h2>left_join: <em>Ejemplo</em></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">songs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;Datasets/songs.csv&quot;</span>)
+songs</code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##   song                name 
+##   &lt;chr&gt;               &lt;chr&gt;
+## 1 Across the Universe John 
+## 2 Come Together       John 
+## 3 Hello, Goodbye      Paul 
+## 4 Peggy Sue           Buddy</code></pre>
+</section><section id="inner_join-y-right_join-ejemplo" class="slide level2">
+<h2>inner_join y right_join : <em>Ejemplo</em></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">artist3 &lt;-<span class="st"> </span><span class="kw">inner_join</span>(songs, artists, <span class="dt">by =</span> <span class="st">&quot;name&quot;</span>)
+artist3</code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##   song                name  plays 
+##   &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt; 
+## 1 Across the Universe John  guitar
+## 2 Come Together       John  guitar
+## 3 Hello, Goodbye      Paul  bass</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">artist4 &lt;-<span class="st"> </span><span class="kw">right_join</span>(songs, artists, <span class="dt">by =</span> <span class="st">&quot;name&quot;</span>)
+artist4</code></pre></div>
+<pre><code>## # A tibble: 5 x 3
+##   song                name   plays 
+##   &lt;chr&gt;               &lt;chr&gt;  &lt;chr&gt; 
+## 1 &lt;NA&gt;                George sitar 
+## 2 Across the Universe John   guitar
+## 3 Come Together       John   guitar
+## 4 Hello, Goodbye      Paul   bass  
+## 5 &lt;NA&gt;                Ringo  drums</code></pre>
+</section><section class="slide level2">
+
+<p>¿Qué pasa si las columnas ‘link’ poseen nombres diferentes?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">left_join</span>(songs,artist2, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;name&quot;</span> =<span class="st"> &quot;Nombres&quot;</span>))</code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##   song                name  plays 
@@ -789,7 +568,7 @@ drums
 ## 2 Come Together       John  guitar
 ## 3 Hello, Goodbye      Paul  bass  
 ## 4 Peggy Sue           Buddy &lt;NA&gt;</code></pre>
-</section><section id="veamos-un-ejemplo-en-r" class="slide level2">
+</section><section id="veamos-un-ejemplo-en-r" class="slide level2 center white" data-background="#75AADB">
 <h2>Veamos un ejemplo en R</h2>
 </section><section id="datos-de-tuberculosis" class="slide level2">
 <h2>Datos de Tuberculosis</h2>
@@ -1407,9 +1186,8 @@ China
 <h2>Definición técnica (Posible)</h2>
 <p>Representación gráfica de datos <strong>codificando la información</strong> como: posición, tamaño, formas, colores</p>
 <p><img src="static/img/data-viz.jpg" width="60%"></p>
-</section><section class="slide level2">
-
-<p>Muchos sabores:</p>
+</section><section id="algunos-gráficos" class="slide level2">
+<h2>Algunos gráficos</h2>
 <p><img src="static/img/charts.gif" /></p>
 </section><section class="slide level2">
 
@@ -1435,7 +1213,7 @@ China
 <p><img src="static/img/unnamed-chunk-15-1.svg" width="960" /></p>
 </section><section id="ejercicio" class="slide level2">
 <h2>Ejercicio</h2>
-<p>¿Existe el mejor gráfico? ¿Cuál de las siguientes formas funciona mejor con el títutlo?</p>
+<p>¿Existe el mejor gráfico? ¿Cuál de las siguientes formas funciona mejor con el título?</p>
 <p><strong>La región del sur exhibe el mayor crecimiento</strong></p>
 <p><br> <small> Adapatado del tweet de <a href="https://twitter.com/lisacrost/status/948233069110222848">Lisa Charlotte Rost</a> que a su vez está viene del ejemplo del libro “Show me the numbers” de Stephen Few </small> </span></p>
 </section><section class="slide level2">
@@ -1607,7 +1385,7 @@ paises</code></pre></div>
 <p></small></p>
 </section><section class="slide level2">
 
-<p>Podemos setear las propiedades estéticas de tu geom manualmente:</p>
+<p>Podemos asignar las propiedades estéticas de tu geom manualmente:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
 <p><img src="static/img/unnamed-chunk-26-1.svg" width="960" /></p>
@@ -1625,11 +1403,48 @@ paises</code></pre></div>
 <p><img src="static/img/unnamed-chunk-28-1.svg" width="960" /></p>
 </section><section class="slide level2">
 
+<p>O cambiar el estilo o temática del gráfico</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop, <span class="dt">color =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_light</span>()</code></pre></div>
+<p><img src="static/img/unnamed-chunk-29-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
 <p>O realizar <em>facets</em>/paneles</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(continent))</code></pre></div>
-<p><img src="static/img/unnamed-chunk-29-1.svg" width="960" /></p>
+<span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(continent))</code></pre></div>
+<p><img src="static/img/unnamed-chunk-30-1.svg" width="960" /></p>
+</section><section id="otros-tipos-de-gráficos-boxplot" class="slide level2">
+<h2>Otros tipos de gráficos: <strong>Boxplot</strong></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Oceania &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(continent<span class="op">==</span><span class="st">&quot;Oceania&quot;</span>)
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> Oceania , <span class="kw">aes</span>(<span class="dt">x =</span> country, <span class="dt">y =</span> lifeExp, <span class="dt">fill =</span> country)) <span class="op">+</span>
+<span class="kw">geom_boxplot</span>(<span class="dt">alpha=</span><span class="fl">0.4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>(<span class="dt">base_size=</span><span class="dv">10</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Pais&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Años&quot;</span>,
+<span class="dt">title =</span> <span class="st">&quot;Esperanza de vida en América&quot;</span>,
+<span class="dt">subtitle =</span> <span class="st">&quot;Entre los años 1952 a 2007&quot;</span>,
+<span class="dt">caption =</span> <span class="st">&quot;Fuente Datos: gapminder&quot;</span>) <span class="op">+</span>
+<span class="kw">coord_flip</span>() <span class="co">#cambia los ejes coordenados</span></code></pre></div>
+<p><img src="static/img/unnamed-chunk-31-1.svg" width="960" /></p>
+</section><section id="otros-tipos-de-gráficos-barras" class="slide level2">
+<h2>Otros tipos de gráficos: <strong>Barras</strong></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cabu&lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Chile&quot;</span>,<span class="st">&quot;Argentina&quot;</span>,
+                                           <span class="st">&quot;Brazil&quot;</span>,<span class="st">&quot;Uruguay&quot;</span>),
+                            year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2002&quot;</span>,<span class="st">&quot;2007&quot;</span>))
+
+p &lt;-<span class="st"> </span>cabu <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(country, gdpPercap,<span class="dt">fill=</span><span class="kw">factor</span>(year))) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>(<span class="dt">base_size=</span><span class="dv">16</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">12</span>))<span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Pais&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;gdp&quot;</span>,
+                                                   <span class="dt">title =</span> <span class="st">&quot;GDP per capita&quot;</span>,
+                                                   <span class="dt">caption =</span> <span class="st">&quot;Fuente Datos: gapminder&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">name =</span> <span class="st">&quot;Año&quot;</span>,<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#E74C3C&quot;</span>,<span class="st">&quot;grey30&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p</code></pre></div>
+<p><img src="static/img/unnamed-chunk-33-1.svg" width="960" /></p>
 </section><section id="paquete-útil-ggthemeassist" class="slide level2">
 <h2>Paquete Útil: <code>GGTHEMEASSIST</code></h2>
 <p>Para editar algunas características de los gráficos, se puede utilizar el adicional proveniente del paquete <code>ggThemeAssist</code>. Para ello:</p>
@@ -1658,7 +1473,7 @@ p3&lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rmisc)
 <span class="kw">multiplot</span>(p1, p2, p3, <span class="dt">cols=</span><span class="dv">1</span>)</code></pre></div>
-<p><img src="static/img/unnamed-chunk-31-1.svg" width="960" /></p>
+<p><img src="static/img/unnamed-chunk-35-1.svg" width="960" /></p>
 </section><section class="slide level2">
 
 <p>Ahora poniéndolo todo junto:</p>
@@ -1667,9 +1482,9 @@ p3&lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> <span class="kw">scale</span>(lifeExp),<span class="dt">colour =</span> <span class="st">&quot;lifeExp&quot;</span>))<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> <span class="kw">scale</span>(pop),<span class="dt">colour =</span> <span class="st">&quot;pop&quot;</span>))<span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;&#39;</span>)</code></pre></div>
-<p><img src="static/img/unnamed-chunk-32-1.svg" width="960" /></p>
-</section><section id="existen-muchos-tipos-de-gráficos-disponibles-en-ggplot2.-veamos-algunos-ejemplos-en-r" class="slide level2 center white" data-background="#75AADB">
-<h2>Existen muchos tipos de gráficos disponibles en <code>ggplot2</code>. Veamos algunos ejemplos en R!</h2>
+<p><img src="static/img/unnamed-chunk-36-1.svg" width="960" /></p>
+</section><section id="veamos-algunos-ejemplos-en-r" class="slide level2 center white" data-background="#75AADB">
+<h2>Veamos algunos ejemplos en R!</h2>
 </section><section id="responda-las-preguntas-de-la-actividad-clase-3.pdf" class="slide level2 center white" data-background="#75AADB">
 <h2>Responda las preguntas de la Actividad-Clase-3.pdf</h2>
 </section></section>

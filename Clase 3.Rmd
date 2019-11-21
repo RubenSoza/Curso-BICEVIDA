@@ -43,60 +43,63 @@ storms <- read.csv('storms.csv', header = T)
 # <br><br>Computación Estadística con R<br><small>Clase 3 <br><br> Rubén Soza</small>{ .center .white data-background="#75AADB" }
 
 
-# Manejo de bases de datos utilizando funciones de dplyr{ .center .white data-background="#75AADB" }
+# Manejo de bases de datos{ .center .white data-background="#75AADB" }
 
-## Importar datos
+## Rename: *Renombra Columnas*
 
-```{r, message = FALSE}
-songs <- read_csv("Datasets/songs.csv")
-kable(songs)
-```
-
-----
+Permite cambiar los nombres de las columnas seleccionadas.
 
 ```{r}
 artists <- read_csv("Datasets/artists.csv")
-kable(artists)
+artists
 ```
 
-## Rename: *Renombrar columnas*
-
-Permite cambiar los nombres de las columnas seleccionadas
+----
 
 ```{r}
-artists %>%
-  rename(Nombres = name) -> artist2
-kable(artist2)
+artists %>% rename(Nombres = name) -> artist2
+artist2
 ```
 
-## join: *Juntar bases de datos*
+## join(): *Junta Bases de Datos*
 
-Existen 7 funciones, en dplyr, que permiten juntar/contrastar dos bases de datos en una sola, utilizando una columna como link. Algunos ejemplos son:
+<p align = "justify">
+Existen 7 funciones, en dplyr, que permiten juntar/contrastar dos bases de datos, utilizando una columna como link.</p> 
+<p align = "left"> Algunos ejemplos son: </p>
+  
+  - `inner_join()`
+  - `left_join()`
+  - `right_join()`
 
-- **inner_join()**
-- **left_join()**
-- **right_join()**
 
-## **left_join**: *Ejemplo*
+## left_join
+  
+  ![](Images/left_join.png)
 
-![](Images/left_join.png)
+## left_join: *Ejemplo*
 
-## Algunos otros ejemplos:
+```{r, message = FALSE}
+songs <- read_csv("Datasets/songs.csv")
+songs
+```
+
+## inner_join y right_join : *Ejemplo*
 
 ```{r}
 artist3 <- inner_join(songs, artists, by = "name")
-kable(artist3)
+artist3
 artist4 <- right_join(songs, artists, by = "name")
-kable(artist4)
+artist4
 ```
 ----
-¿Qué pasa si las columnas links poseen 2 nombres diferentes?
-
+  
+¿Qué pasa si las columnas 'link' poseen nombres diferentes?
+  
 ```{r}
 left_join(songs,artist2, by = c("name" = "Nombres"))
 ```
 
-## Veamos un ejemplo en R
+## Veamos un ejemplo en R{ .center .white data-background="#75AADB" }
 
 ## Datos de Tuberculosis
 
@@ -159,7 +162,7 @@ table2s <- spread(table2, type, count)
 kable(table2s)
 ```
 
-## Veamos un ejemplo en R{ .center .white data-background="#75AADB" }
+## Veamos un ejemplo en R{ .center .white data-background="#75AADB"}
 
 # Análisis exploratorio y descriptivo en R{ .center .white data-background="#75AADB" }
 
@@ -184,7 +187,7 @@ Representación gráfica de datos __codificando la información__ como: posició
 
 ----
 
-Muchos sabores:
+## Algunos gráficos
 
 ![](static/img/charts.gif)
 
@@ -319,7 +322,7 @@ ggplot(ggnet) +
 
 ## Ejercicio
 
-¿Existe el mejor gráfico? ¿Cuál de las siguientes formas funciona mejor con el títutlo?
+¿Existe el mejor gráfico? ¿Cuál de las siguientes formas funciona mejor con el título?
 
 __La región del sur exhibe el mayor crecimiento__
 
@@ -458,7 +461,7 @@ ggplot(data = paises) +
 
 ----
 
-Podemos setear  las propiedades estéticas de tu geom manualmente:
+Podemos asignar las propiedades estéticas de tu geom manualmente:
 
 ```{r, echo=TRUE,  fig.height = 4}
 ggplot(data = paises) + 
@@ -486,13 +489,61 @@ ggplot(data = paises) +
 
 ---- 
 
+O cambiar el estilo o temática del gráfico
+
+```{r, echo=TRUE,  fig.height = 4}
+ggplot(data = paises) + 
+  geom_point(mapping = aes(x = lifeExp, y = gdpPercap, size = pop, color = continent)) +
+  theme_light()
+```
+
+----
+
 O realizar _facets_/paneles
 
 ```{r, echo=TRUE,  fig.height = 4}
 ggplot(data = paises) + 
   geom_point(mapping = aes(x = lifeExp, y = gdpPercap, size = pop)) +
-  facet_wrap(vars(continent))
+  theme_light() + facet_wrap(vars(continent))
 ```
+
+## Otros tipos de gráficos: **Boxplot**
+
+```{r, fig.height = 3}
+Oceania <- gapminder %>%
+  filter(continent=="Oceania")
+
+ggplot(data = Oceania , aes(x = country, y = lifeExp, fill = country)) +
+geom_boxplot(alpha=0.4) + theme_bw(base_size=10) +
+  theme(legend.position = "none") + labs(x = "Pais", y = "Años",
+title = "Esperanza de vida en América",
+subtitle = "Entre los años 1952 a 2007",
+caption = "Fuente Datos: gapminder") +
+coord_flip() #cambia los ejes coordenados
+```
+
+## Otros tipos de gráficos: **Barras**
+
+```{r}
+cabu<- gapminder %>% filter(country %in% c("Chile","Argentina",
+                                           "Brazil","Uruguay"),
+                            year %in% c("2002","2007"))
+
+p <- cabu %>% 
+  ggplot(aes(country, gdpPercap,fill=factor(year))) + theme_bw(base_size=16) +
+  theme(axis.text.x = element_text(size=12))+ labs(x = "Pais", y = "gdp",
+                                                   title = "GDP per capita",
+                                                   caption = "Fuente Datos: gapminder") +
+  scale_fill_manual(name = "Año",values=c("#E74C3C","grey30")) + 
+  geom_bar(stat = "identity",position = "dodge")
+```
+
+----
+
+```{r, fig.height=4}
+p
+```
+
 
 ## Paquete Útil: `GGTHEMEASSIST`
 
@@ -544,6 +595,6 @@ ggplot(data = Ang) +
 
 ```
 
-## Existen muchos tipos de gráficos disponibles en `ggplot2`. Veamos algunos ejemplos en R!{ .center .white data-background="#75AADB" }
+## Veamos algunos ejemplos en R!{ .center .white data-background="#75AADB" }
 
 ## Responda las preguntas de la Actividad-Clase-3.pdf{ .center .white data-background="#75AADB" }
