@@ -164,7 +164,7 @@ kable(table2s)
 
 ## Veamos un ejemplo en R{ .center .white data-background="#75AADB"}
 
-# Análisis exploratorio y descriptivo en R{ .center .white data-background="#75AADB" }
+# Visualización de datos{ .center .white data-background="#75AADB" }
 
 ## Estructura
 
