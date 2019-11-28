@@ -5,7 +5,7 @@ author: "Nombre"
 output: html_document
 ---
 
-Introducción
+## Introducción
 
 Candy Crush Saga es un exitoso juego móvil desarrollado por King. Es jugado por millones de personas en todo el mundo. El juego está estructurado como una serie de niveles donde los jugadores deben unir caramelos similares para (con suerte) borrar el nivel y seguir progresando en el mapa de nivel. 
   
