@@ -1,5 +1,5 @@
 ---
-title: "Actividad II"
+title: "Actividad I"
 author: "Rubén Soza"
 output: 
   prettydoc::html_pretty:
@@ -26,6 +26,12 @@ head(carrera)
 
 Queremos modelar el tiempo utilizando alguna de las otras 2 variables. Para escoger entre una de las dos, miremos su correlación lineal:
 
+```{r log}
+carrera <- carrera %>% 
+  mutate(tiempo = log(tiempo))
+```
+
+
 ```{r pairs, fig.height = 4, message = FALSE}
 library(GGally)
 ggpairs(carrera)
@@ -46,7 +52,7 @@ summary(modelo2)
 ```
 
 El coeficiente asociado a la altura es significativo. De hecho, el modelo ajustado será
-$$\hat{\text{tiempo}}_i = `r round(modelo2$coef[1],2)`\text{altura}_i.$$ Gráficamente esto será:
+$$\hat{\text{tiempo}}_i = `r round(modelo2$coef[1],5)`\text{altura}_i.$$ Gráficamente esto será:
 
 ```{r graf lm, fig.height = 4}
 library(ggiraph); library(ggiraphExtra)
@@ -76,7 +82,7 @@ ggplot(data, aes(x = fit, y = res, label = labels)) + geom_point() +
 
 ```
 
-De aquí vemos que los valores atípicos o outliers son las observaciones 11,31 y 33. Además se observa cierto comportamiento de abertura de megáfono de los datos. Esto nos dice que la función de media no esta bien especificada y que la varianza no cumple el supuesto de homocedasticidad. Para encontrar los $h_{ii}$ junto a las Distancias de Cook y DFFITS utilizamos el siguiente código:
+De aquí vemos que los valores atípicos o outliers es la observaciones 7. Además se observa un comportamiento de no nube de puntos. Esto nos dice que la función de media no esta bien especificada y que la varianza no cumple el supuesto de homocedasticidad. Para encontrar los $h_{ii}$ junto a las Distancias de Cook y DFFITS utilizamos el siguiente código:
 
 ```{r}
 summary(influence.measures(modelo2))
@@ -88,7 +94,7 @@ library(lmtest)
 dwtest(tiempo ~ altura - 1, data = carrera)
 ```
 
-Notar que el valor-$p$ es mayor que 0.05, lo que nos dice que no se rechaza la Hipótesis Nula. Por ende, existe evidencia para decir que los errores son independientes. Finalmente, para el supuesto de normalidad observemos el siguiente qqplot: 
+Notar que el valor-$p$ es menor que 0.05, lo que nos dice que no se rechaza la Hipótesis Nula. Por ende, existe evidencia para decir que los errores no son independientes. Finalmente, para el supuesto de normalidad observemos el siguiente qqplot: 
 
 ```{r}
 ggplot(tibble("res" = modelo2$residuals), aes(sample = res)) + 
